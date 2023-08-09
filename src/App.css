@@ -16,7 +16,7 @@
 }
 
 .clock {
-  font-size: 2rem;
+  font-size: 4rem;
   font-family: "Arial", sans-serif;
   letter-spacing: 4px;
   animation: colorChange 5s infinite;
@@ -53,7 +53,7 @@
   height: 100px;
   margin-top: 20px;
   position: relative;
-  scale: 1;
+  scale: 2;
 }
 
 .hand {
