@@ -1,35 +1,69 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useState, useEffect } from "react";
+import "./App.css"; // Assurez-vous d'avoir un fichier App.css pour le style
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [time, setTime] = useState(new Date());
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setTime(new Date());
+    }, 1000);
+
+    return () => clearInterval(intervalId);
+  }, []);
+
+  const clockStyle = {
+    color: "#fff",
+    textAlign: "center",
+    height: "30px",
+  };
+
+  const hours = time.getHours();
+  const minutes = time.getMinutes();
+  const seconds = time.getSeconds();
+
+  const hourDeg = (hours + minutes / 60) * 30;
+  const minuteDeg = (minutes + seconds / 60) * 6;
+  const secondDeg = seconds * 6;
+
+  const hourStyle = {
+    transform: `rotate(${hourDeg}deg) translate(0px, -30px)`,
+  };
+
+  const minuteStyle = {
+    transform: `rotate(${minuteDeg}deg) translate(0px, -38px)`,
+  };
+
+  const secondStyle = {
+    transform: `rotate(${secondDeg}deg) translate(0px, -29px)`,
+    backgroundColor: "#ff0000",
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div className="App">
+      <div className="clock digital" style={clockStyle}>
+        {time.toLocaleTimeString()}
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
+      <div className="analog-clock">
+        <div className="clock-circle">
+          {[...Array(12)].map((_, index) => (
+            <div
+              key={index}
+              className="clock-number"
+              style={{
+                transform: `rotate(${index * 30}deg) translate(0, -100px)`,
+              }}
+            >
+              {index === 0 ? 12 : index}
+            </div>
+          ))}
+        </div>
+        <div className="hand hour-hand" style={hourStyle}></div>
+        <div className="hand minute-hand" style={minuteStyle}></div>
+        <div className="hand second-hand" style={secondStyle}></div>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    </div>
+  );
 }
 
-export default App
+export default App;

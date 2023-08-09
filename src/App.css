@@ -1,42 +1,108 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+* {
+  margin: 0;
+  padding: 0;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.App {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  background-color: #000;
+  margin: 0;
+  flex-direction: column;
+  overflow: hidden;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+.clock {
+  font-size: 1rem;
+  font-family: "Arial", sans-serif;
+  letter-spacing: 4px;
+  animation: colorChange 5s infinite;
+}
+
+@keyframes colorChange {
+  0%,
+  100% {
+    color: #ff00ff;
+    text-shadow: 0 0 10px #ff00ff;
   }
-  to {
-    transform: rotate(360deg);
+  20% {
+    color: #00ffff;
+    text-shadow: 0 0 10px #00ffff;
+  }
+  40% {
+    color: #ff0000;
+    text-shadow: 0 0 10px #ff0000;
+  }
+  60% {
+    color: #00ff00;
+    text-shadow: 0 0 10px #00ff00;
+  }
+  80% {
+    color: #ffff00;
+    text-shadow: 0 0 10px #ffff00;
   }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.analog-clock {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+  margin-top: 20px;
+  position: relative;
+  scale: 0.5;
 }
 
-.card {
-  padding: 2em;
+.hand {
+  position: absolute;
+  transform-origin: center;
+  background-color: #fff;
+  transition: transform 0.5s cubic-bezier(0.4, 2.05, 0.2, 1);
 }
 
-.read-the-docs {
-  color: #888;
+.hour-hand {
+  width: 4px;
+  height: 60px;
+}
+
+.minute-hand {
+  width: 3px;
+  height: 80px;
+}
+
+.second-hand {
+  width: 2px;
+  height: 60px;
+  background-color: #ff0000;
+}
+
+.analog-clock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  margin-top: -50px;
+}
+
+.clock-circle {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.clock-number {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  font-size: 1rem;
+  color: #fff;
+  font-weight: bold;
+  user-select: none;
 }
